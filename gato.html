@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Cat</title>
+    <style>
+        body {
+            margin: 0;
+            overflow: hidden;
+        }
+
+        img {
+            position: absolute;
+            width: 100px;
+            height: auto;
+        }
+    </style>
+</head>
+<body>
+    <img src="https://pngimg.com/d/cat_PNG50447.png" id="myCat" alt="My Cat">
+    <audio id="bonk" src="Som\bonk_BEtiM8g.mp3"></audio>
+
+    <script>
+        const img = document.getElementById('myCat');
+        const sound = document.getElementById('bonk');
+        const speed = 3;
+        let x = Math.random() * window.innerWidth;
+        let y = Math.random() * window.innerHeight;
+        let dx = speed * (Math.random() < 0.5 ? 1 : -1);
+        let dy = speed * (Math.random() < 0.5 ? 1 : -1);
+
+        function playSound() {
+            sound.currentTime = 1.1;
+            sound.play();
+        }
+
+        function moveImage() {
+            x += dx;
+            y += dy;
+
+            if (x <= 0 || x + img.offsetWidth >= window.innerWidth) {
+                dx *= -1;
+                playSound();
+            }
+            if (y <= 0 || y + img.offsetHeight >= window.innerHeight) {
+                dy *= -1;
+                playSound();
+            }
+
+            img.style.left = x + 'px';
+            img.style.top = y + 'px';
+
+            requestAnimationFrame(moveImage);
+        }
+
+        moveImage();
+    </script>
+</body>
+</html>
